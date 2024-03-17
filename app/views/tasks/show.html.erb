@@ -38,7 +38,11 @@
       <strong>Upload:</strong>
     </div>
     <div class="col fs-6">
+    <% if @task.upload.present? %>
       <%= image_tag @task.upload, style: 'width: 500px' %>
+    <% else %>
+      <p>No upload available</p>
+    <% end %>
     </div>
   </div>
   </div>
