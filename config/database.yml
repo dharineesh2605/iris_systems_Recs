@@ -10,7 +10,10 @@ default: &default
   pool: 200
   username: root
   password: 
-  socket: /var/run/mysqld/mysqld.sock
+  host: db
+  port: 3306
+  database: rec_2024
+  # socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -20,8 +23,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: rec_2024_test
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: rec_2024_prod

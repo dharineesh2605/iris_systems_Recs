@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: rec_2024
+    networks:
+      - my_network
+
+  web:
+    build: .
+    ports:
+      - "8080:3000"
+    command: bash -c "rails db:prepare && rails s -b 0.0.0.0"
+    depends_on:
+      - db
+    networks:
+      - my_network
+
+networks:
+  my_network:
+   driver: bridge
