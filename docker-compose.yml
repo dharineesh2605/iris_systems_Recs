@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: rec_2024
     networks:
       - my_network
+    volumes:
+      - db_data:/var/lib/mysql
 
   web:
     build: .
@@ -24,6 +26,7 @@ services:
       - "8080:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - nginx_data:/etc/nginx
     depends_on:
       - web
     networks:
@@ -32,3 +35,7 @@ services:
 networks:
   my_network:
    driver: bridge
+
+volumes:
+  db_data:
+  nginx_data:
