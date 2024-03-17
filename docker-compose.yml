@@ -12,11 +12,20 @@ services:
 
   web:
     build: .
-    ports:
-      - "8080:3000"
     command: bash -c "rails db:prepare && rails s -b 0.0.0.0"
-    depends_on:
+    depends_on: 
       - db
+    networks:
+      - my_network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web
     networks:
       - my_network
 
